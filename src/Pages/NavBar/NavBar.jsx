@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -6,8 +6,13 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import siteLogo from "../../Assets/whole.png";
+import LoginModal from "../../Component/LoginModal";
 
 const NavBar = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
       <Navbar
@@ -40,7 +45,7 @@ const NavBar = () => {
               </InputGroup>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets">
+              <Nav.Link href="#deets" onClick={handleShow}>
                 Create account,<span className="text-primary"> It's free!</span>
               </Nav.Link>
               <NavDropdown eventKey={2} href="#memes"></NavDropdown>
@@ -48,6 +53,7 @@ const NavBar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <LoginModal handleClose={handleClose} show={show} />
     </>
   );
 };
